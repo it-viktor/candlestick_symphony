@@ -52,4 +52,6 @@ For use this you need:
     leverage_trade = 10
     
     
+.. code:: bash
 
+    python3 candlestick_symphony.py
