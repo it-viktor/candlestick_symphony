@@ -40,3 +40,16 @@ For use this you need:
 
 - Will work automatically and trade in Futures Hedge mode
 - This version is only for timeframe = 15m, leverage = 10 and symbol whose price is floating point(0.***)
+
+
+.. code:: python
+
+    # Set
+    api_key = "*************************"
+    api_secret = "*************************"
+    symbol_hold = 'USDT'
+    symbol_trade = 'CELR'
+    leverage_trade = 10
+    
+    
+
