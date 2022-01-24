@@ -23,13 +23,10 @@ How it works...
  market_position_summ = market_position_summ / 2  # for 1 market order
  limit_average_position_summ = market_position_summ / 2  # for 2 limit order
 
-
-
-
 - PLACE_ORDER
-- For LONG Place 1 market BUY, 2 limit BUY, 4 limit SELL and 4 limit SELL if limit BUY success  # place_doji_long()
-- For SHORT Place 1 market SELL, 2 limit SELL, 4 limit BUY and 4 limit BUY if limit SELL success  # place_doji_short()
-- Place SL and TP
+For LONG Place 1 market BUY, 2 limit BUY, 4 limit SELL and 4 limit SELL if limit BUY success  # place_doji_long()
+For SHORT Place 1 market SELL, 2 limit SELL, 4 limit BUY and 4 limit BUY if limit SELL success  # place_doji_short()
+Place SL and TP
 
 
 Will work automatically and trade in Futures Hedge mode
