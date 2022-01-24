@@ -31,11 +31,23 @@ def datetime_from_millis(millis, epoch=datetime(1970, 1, 1)):
 
 symbol_hold = 'USDT'
 symbol_trade = 'CELR'
+doji_difference = float(0.0001)
 trade_pair = symbol_trade + symbol_hold
 leverage_trade = 10
 client.futures_change_leverage(symbol = trade_pair, leverage = leverage_trade)
 time.sleep(0.5)
 
+def check_hold_balance():
+    balance = client.futures_account_balance()
+    time.sleep(0.5)
+    balance_hold_symbol = float(0)
+    for i in range(len(balance)):
+        if balance[i]['asset'] != symbol_hold:
+            continue
+        balance_hold_symbol = balance[i]['balance']
+    balance_hold_symbol = float(balance_hold_symbol)
+    return balance_hold_symbol
+print(f'Balance: {int(check_hold_balance())} USDT')
 
 def calculate_summ_order_in():
     symbol_trade_price = float(client.get_avg_price(symbol=trade_pair)['price'])
@@ -103,7 +115,7 @@ def search_doji():
                     Open, Close, High, Low = 0, 0, 0, 0
                     continue
                 else:
-                    if Open <= Close and Close < Open + 0.0001 or Open >= Close and Close > Open - 0.0001:
+                    if Open <= Close and Close < Open + doji_difference or Open >= Close and Close > Open - doji_difference:
                         print('System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'Open:', Open, 'Close:', Close, 'doji !!!SUCCESS!!')
                         check_bar2 = klines[-3]
                         Open2 = float(check_bar2[1])
