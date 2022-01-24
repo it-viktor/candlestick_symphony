@@ -80,3 +80,13 @@ For use this you need:
 - CAUTOIN!!! There may be STOPLOSS and LOSS OF YOUR MONEY!!!
 - This version is only for USDT timeframe = 15m, leverage = 10 and symbol whose price is floating point(0.***)
 
+.. figure:: long.png
+       :scale: 300 %
+       :align: center
+       :alt: Альтернативный текст
+
+.. figure:: short.png
+       :scale: 300 %
+       :align: center
+       :alt: Альтернативный текст
+       
