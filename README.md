@@ -1,2 +1,2 @@
-# candlestick_symphony
-Future trade bot
+# candlestick_symphony - Future trade bot
+
