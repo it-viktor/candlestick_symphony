@@ -48,6 +48,8 @@ def check_hold_balance():
     balance_hold_symbol = float(balance_hold_symbol)
     return balance_hold_symbol
 print(f'Balance: {int(check_hold_balance())} USDT')
+print(f'Symbol trade: {trade_pair}')
+trade_pair
 
 def calculate_summ_order_in():
     symbol_trade_price = float(client.get_avg_price(symbol=trade_pair)['price'])
@@ -325,6 +327,8 @@ def place_doji_long(High, Open, Close, Low):
             break
         average_long(info_order_limit1, info_order_limit2, limit_position_vol_price, limit_position_vol_price2, limit_position_vol_price3, limit_position_vol_price4)
     print()
+    print(f'Balance: {int(check_hold_balance())} USDT')
+    print(f'Symbol trade: {trade_pair}')
     print('Check results in exchange,  GOOD LUCK!!')
     print()
     print()
@@ -499,6 +503,8 @@ def place_doji_short(High, Open, Close, Low):
             break
         average_short(info_order_limit1, info_order_limit2, limit_position_vol_price, limit_position_vol_price2, limit_position_vol_price3, limit_position_vol_price4)
     print()
+    print(f'Symbol trade: {trade_pair}')
+    print(f'Balance: {int(check_hold_balance())} USDT')
     print('Check results in exchange,  GOOD LUCK!!')
     print()
     print()
