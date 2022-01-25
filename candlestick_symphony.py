@@ -209,8 +209,10 @@ def place_doji_long(High, Open, Close, Low):
     # buy_limit
     info_order_limit2 = client.futures_create_order(symbol = trade_pair, side = 'BUY', type = 'LIMIT', price = limit_position2_price, positionSide = 'LONG', quantity = int(limit_average_position_summ), timeInForce='GTC')
     time.sleep(0.5)
+    info_order_market_price = client.futures_get_order(symbol = trade_pair, orderId = info_order_market['orderId'])['avgPrice']
+    time.sleep(0.5)
     print()
-    print(f"Binance time: {str(datetime_from_millis(info_order_market['updateTime']))[0:19]} {info_order_market['symbol']} {info_order_market['positionSide']} orderId:{info_order_market['orderId']} price:{info_order_market['price']} size:{info_order_market['origQty']} {info_order_market['type']} {info_order_market['side']}")
+    print(f"Binance time: {str(datetime_from_millis(info_order_market['updateTime']))[0:19]} {info_order_market['symbol']} {info_order_market['positionSide']} orderId:{info_order_market['orderId']} price:{info_order_market_price} size:{info_order_market['origQty']} {info_order_market['type']} {info_order_market['side']}")
     print(f"Binance time: {str(datetime_from_millis(info_order_sl['updateTime']))[0:19]} {info_order_sl['symbol']} {info_order_sl['positionSide']} orderId:{info_order_sl['orderId']} price:{info_order_sl['price']} size:{info_order_sl['origQty']} {info_order_sl['type']} {info_order_sl['side']}")
     print(f"Binance time: {str(datetime_from_millis(info_order_limit1['updateTime']))[0:19]} {info_order_limit1['symbol']} {info_order_limit1['positionSide']} orderId:{info_order_limit1['orderId']} price:{info_order_limit1['price']} size:{info_order_limit1['origQty']} {info_order_limit1['type']} {info_order_limit1['side']}")
     print(f"Binance time: {str(datetime_from_millis(info_order_limit2['updateTime']))[0:19]} {info_order_limit2['symbol']} {info_order_limit2['positionSide']} orderId:{info_order_limit2['orderId']} price:{info_order_limit2['price']} size:{info_order_limit2['origQty']} {info_order_limit2['type']} {info_order_limit2['side']}")
@@ -380,8 +382,10 @@ def place_doji_short(High, Open, Close, Low):
     # buy_limit
     info_order_limit2 = client.futures_create_order(symbol = trade_pair, side = 'SELL', type = 'LIMIT', price = limit_position2_price, positionSide = 'SHORT', quantity = int(limit_average_position_summ), timeInForce='GTC')
     time.sleep(0.5)
+    info_order_market_price = client.futures_get_order(symbol = trade_pair, orderId = info_order_market['orderId'])['avgPrice']
+    time.sleep(0.5)
     print()
-    print(f"Binance time: {str(datetime_from_millis(info_order_market['updateTime']))[0:19]} {info_order_market['symbol']} {info_order_market['positionSide']} orderId:{info_order_market['orderId']} price:{info_order_market['price']} size:{info_order_market['origQty']} {info_order_market['type']} {info_order_market['side']}")
+    print(f"Binance time: {str(datetime_from_millis(info_order_market['updateTime']))[0:19]} {info_order_market['symbol']} {info_order_market['positionSide']} orderId:{info_order_market['orderId']} price:{info_order_market_price} size:{info_order_market['origQty']} {info_order_market['type']} {info_order_market['side']}")
     print(f"Binance time: {str(datetime_from_millis(info_order_sl['updateTime']))[0:19]} {info_order_sl['symbol']} {info_order_sl['positionSide']} orderId:{info_order_sl['orderId']} price:{info_order_sl['price']} size:{info_order_sl['origQty']} {info_order_sl['type']} {info_order_sl['side']}")
     print(f"Binance time: {str(datetime_from_millis(info_order_limit1['updateTime']))[0:19]} {info_order_limit1['symbol']} {info_order_limit1['positionSide']} orderId:{info_order_limit1['orderId']} price:{info_order_limit1['price']} size:{info_order_limit1['origQty']} {info_order_limit1['type']} {info_order_limit1['side']}")
     print(f"Binance time: {str(datetime_from_millis(info_order_limit2['updateTime']))[0:19]} {info_order_limit2['symbol']} {info_order_limit2['positionSide']} orderId:{info_order_limit2['orderId']} price:{info_order_limit2['price']} size:{info_order_limit2['origQty']} {info_order_limit2['type']} {info_order_limit2['side']}")
