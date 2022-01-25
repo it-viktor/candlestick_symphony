@@ -49,6 +49,8 @@ def check_hold_balance():
     return balance_hold_symbol
 print(f'Balance: {int(check_hold_balance())} USDT')
 print(f'Symbol trade: {trade_pair}')
+print(f'Leverage: {leverage_trade}')
+print(f'Doji diff: {doji_difference}')
 trade_pair
 
 def calculate_summ_order_in():
