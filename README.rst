@@ -8,14 +8,17 @@ For use this you need:
   - Ubuntu 20.04 
   - pip 20.0.2 
   - or other specifications
+  - Recommended: Stable VPS 5$/month `Inferno Solutions <https://cp.inferno.name/aff.php?aff=3406>`_ 
   
   
-For use this you need:
+Start step by step:
    - `Login Binance account <https://www.binance.com/?ref=MNJSQTZI>`_ 
    - Go to USDⓈ-M Page
    - Choice your symbol
    - `Turn ON Hedge mode <https://www.binance.com/en/support/faq/360041819691>`_
    - Generate API for Futures
+   - Recommended: For easy trading analysis `Trading journal - Trader Make Money <https://tradermake.money/?ref=KGMY8G>`_
+   
 
 
 
@@ -50,9 +53,7 @@ For use this you need:
     System  time: 2022-01-24 19:43 Start the bot in search of the doji star...
  
  
- 
-
-
+ bot working! GOOD LUCK!!
 
 
 .. code:: python
@@ -90,3 +91,4 @@ For use this you need:
        :align: center
        :alt: Альтернативный текст
        
+
