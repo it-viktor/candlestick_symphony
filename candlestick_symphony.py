@@ -20,8 +20,8 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-    
-    
+api_key = "you_api_binance_futures"
+api_secret = "you_api_secret_binance_futures"    
 symbol_hold = 'USDT'
 symbol_trade = 'CELR'
 doji_difference = float(0.0001)
@@ -29,9 +29,6 @@ trade_pair = symbol_trade + symbol_hold
 leverage_trade = 10
 client.futures_change_leverage(symbol = trade_pair, leverage = leverage_trade)
 time.sleep(0.5)
-    
-api_key = "you_api_binance_futures"
-api_secret = "you_api_secret_binance_futures"
 client = Client(api_key, api_secret)
 time.sleep(0.5)
 
