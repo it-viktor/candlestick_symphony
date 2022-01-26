@@ -80,6 +80,19 @@ Start step by step:
     Place SL and TP
     Bot open 1 LONG or open 1 SHORT or open 1 LONG and 1 SHORT position
 
+- Telegram notification
+
+.. code:: python
+
+    # сreate tg bot in fatherbot
+    # copy api
+    # send any message to the chat bot
+    # сhange flag == True
+    telegram_notification = True
+    # enter api
+    api_tg = 'you_api_telegram'
+
+
 - Attention!!! There may be errors
 - CAUTOIN!!! There may be STOPLOSS and LOSS OF YOUR MONEY!!!
 - This version is only for USDT timeframe = 15m, leverage = 10 and symbol whose price is floating point(0.***)
@@ -94,4 +107,3 @@ Start step by step:
        :align: center
        :alt: Альтернативный текст
        
-
