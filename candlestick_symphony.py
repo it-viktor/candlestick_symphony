@@ -27,10 +27,9 @@ symbol_trade = 'CELR'
 doji_difference = float(0.0001)
 trade_pair = symbol_trade + symbol_hold
 leverage_trade = 10
-client.futures_change_leverage(symbol = trade_pair, leverage = leverage_trade)
-time.sleep(0.5)
 client = Client(api_key, api_secret)
 time.sleep(0.5)
+client.futures_change_leverage(symbol = trade_pair, leverage = leverage_trade)
 
 telegram_notification = False
 api_tg = 'you_api_telegram'
