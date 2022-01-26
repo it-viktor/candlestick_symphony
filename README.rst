@@ -24,10 +24,13 @@ Start step by step:
 
 .. code:: bash
 
+    :~$ sudo apt-get update
+    :~$ sudo apt-get upgrade
+    
     :~$ lsb_release -a
     Description:  Ubuntu 20.04.3 LTS
     Release:  20.04
-    
+        
     :~$ python3 -V
     Python 3.8.10
     
