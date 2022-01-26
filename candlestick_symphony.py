@@ -6,6 +6,7 @@ from binance.client import Client
 from binance.enums import *
 import time
 import os
+import requests
 from threading import Thread
 class bcolors:
     HEADER = '\033[95m'
@@ -18,15 +19,9 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-api_key = "*************************"
-api_secret = "*************************"
-client = Client(api_key, api_secret)
-time.sleep(0.5)
-#  Convert milliseconds to date
-def datetime_from_millis(millis, epoch=datetime(1970, 1, 1)):
-    """Return UTC time that corresponds to milliseconds since Epoch."""
-    return epoch + timedelta(milliseconds=millis)
 
+    
+    
 symbol_hold = 'USDT'
 symbol_trade = 'CELR'
 doji_difference = float(0.0001)
@@ -34,6 +29,34 @@ trade_pair = symbol_trade + symbol_hold
 leverage_trade = 10
 client.futures_change_leverage(symbol = trade_pair, leverage = leverage_trade)
 time.sleep(0.5)
+    
+api_key = "you_api_binance_futures"
+api_secret = "you_api_secret_binance_futures"
+client = Client(api_key, api_secret)
+time.sleep(0.5)
+
+telegram_notification = False
+api_tg = 'you_api_telegram'
+
+
+def tg_get_update():
+    url = f'https://api.telegram.org/bot{api_tg}/getUpdates'
+    r = requests.get(url)
+    r = r.json()
+    chat_id = r['result'][-1]['message']['chat']['id']
+    return chat_id
+
+chat_it_tg = tg_get_update()
+
+
+def tg_send_m(api_tg, chat_it_tg, text_m_tg):
+    tmp_tg_m = requests.get(f'https://api.telegram.org/bot{api_tg}/sendmessage?chat_id={chat_id_tg}&text={text_m_tg}')
+
+#  Convert milliseconds to date
+def datetime_from_millis(millis, epoch=datetime(1970, 1, 1)):
+    """Return UTC time that corresponds to milliseconds since Epoch."""
+    return epoch + timedelta(milliseconds=millis)
+
 
 def check_hold_balance():
     try:
@@ -64,6 +87,8 @@ def check_hold_balance():
         if res_long == 0.0 and res_short == 0.0:
             time.sleep(0.5)
             client.futures_cancel_all_open_orders(symbol = trade_pair)
+        if telegram_notification == True:
+            tg_send_m(api_tg, chat_it_tg, 'ERROR!!!! check_hold_balance')
         raise
 
 print(f'Balance: {int(check_hold_balance())} USDT')
@@ -113,6 +138,8 @@ def calculate_summ_order_in():
         if res_long == 0.0 and res_short == 0.0:
             time.sleep(0.5)
             client.futures_cancel_all_open_orders(symbol = trade_pair)
+        if telegram_notification == True:
+            tg_send_m(api_tg, chat_it_tg, 'ERROR!!!! calculate_summ_order_in')
         raise
 
 flag_long = False
@@ -131,6 +158,8 @@ def search_doji():
         time_m_tmp = '-15'
         print()
         print(trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'Start the bot in search of the doji star...')
+        if telegram_notification == True:
+        	tg_send_m(api_tg, chat_it_tg, 'Start the bot in search of the doji star...')
         while flag == True:
             time.sleep(1)
             tmp_localtime_m = str(time.strftime('%M', time.localtime(time.time()))[-2:])
@@ -173,6 +202,11 @@ def search_doji():
                             if Open2 < Close2 and Open3 < Close3 and High > High2 and High2 > High3:
                                 print()
                                 print(bcolors.FAIL + trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'Short signal' + bcolors.ENDC)
+                                if telegram_notification == True:
+                                    tg_send_m(api_tg, chat_it_tg, 'Short signal in')
+                                    balance_tg = f'Balance {int(check_hold_balance())} USDT'
+                                    tg_send_m(api_tg, chat_it_tg, balance_tg)
+                                    int(check_hold_balance())
                                 if flag_short == False:
                                     flag_short = True
                                     count_main -= 1
@@ -184,6 +218,10 @@ def search_doji():
                             elif Open2 > Close2 and Open3 > Close3 and Low < Low2 and Low2 < Low3:
                                 print()
                                 print(bcolors.OKGREEN + trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'Long signal' + bcolors.ENDC)
+                                if telegram_notification == True:
+                                    tg_send_m(api_tg, chat_it_tg, 'Long signal in')
+                                    balance_tg = f'Balance {int(check_hold_balance())} USDT'
+                                    tg_send_m(api_tg, chat_it_tg, balance_tg)
                                 if flag_long == False:
                                     flag_long = True
                                     count_main -= 1
@@ -222,6 +260,8 @@ def search_doji():
         if res_long == 0.0 and res_short == 0.0:
             time.sleep(0.5)
             client.futures_cancel_all_open_orders(symbol = trade_pair)
+        if telegram_notification == True:
+            tg_send_m(api_tg, chat_it_tg, 'ERROR!!!! search_doji')
         raise
 
 average_order_long1 = 0
@@ -386,7 +426,10 @@ def place_doji_long(High, Open, Close, Low):
                 break
             average_long(info_order_limit1, info_order_limit2, limit_position_vol_price, limit_position_vol_price2, limit_position_vol_price3, limit_position_vol_price4)
         print()
-        print(f'Balance: {int(check_hold_balance())} USDT')
+        if telegram_notification == True:
+            balance_tg = f'Balance {int(check_hold_balance())} USDT'
+            tg_send_m(api_tg, chat_it_tg, balance_tg)
+        print(balance_tg)
         print(f'Symbol trade: {trade_pair}')
         print('Check results in exchange,  GOOD LUCK!!')
         print()
@@ -416,6 +459,8 @@ def place_doji_long(High, Open, Close, Low):
         if res_long == 0.0 and res_short == 0.0:
             time.sleep(0.5)
             client.futures_cancel_all_open_orders(symbol = trade_pair)
+        if telegram_notification == True:
+            tg_send_m(api_tg, chat_it_tg, 'ERROR!!!! place_doji_long')
         raise
 
 def place_doji_short(High, Open, Close, Low):
@@ -576,8 +621,11 @@ def place_doji_short(High, Open, Close, Low):
                 break
             average_short(info_order_limit1, info_order_limit2, limit_position_vol_price, limit_position_vol_price2, limit_position_vol_price3, limit_position_vol_price4)
         print()
+        if telegram_notification == True:
+            balance_tg = f'Balance {int(check_hold_balance())} USDT'
+            tg_send_m(api_tg, chat_it_tg, balance_tg)
+        print(balance_tg)
         print(f'Symbol trade: {trade_pair}')
-        print(f'Balance: {int(check_hold_balance())} USDT')
         print('Check results in exchange,  GOOD LUCK!!')
         print()
         print()
@@ -589,24 +637,26 @@ def place_doji_short(High, Open, Close, Low):
         print(bcolors.WARNING + f'-Donate for the development of the bot-' + bcolors.ENDC)
         print(f'         And wait for Update...\n-------------USDT TRC20----------------\n--THNh5f5MBBVpP7MvzCZdSeNCMzzadG6Ld4---\n' + bcolors.ENDC)
     except Exception:
-         print(bcolors.FAIL + f"ERROR!!!! 'place_doji_short'" + bcolors.ENDC)
-         res_long = float(client.futures_position_information(symbol = trade_pair)[1]['positionAmt'])
-         time.sleep(0.5)
-         res_short = float(client.futures_position_information(symbol = trade_pair)[2]['positionAmt'])
-         if res_long > 0.0:
-             time.sleep(0.5)
-             client.futures_create_order(symbol=trade_pair, side='SELL', type='MARKET', positionSide='LONG', quantity=int(res_long))
-             res_long = float(0)
-         if res_short < 0.0:
-             time.sleep(0.5)
-             tmp_short_b = str(client.futures_position_information(symbol = trade_pair)[2]['positionAmt'])[1:]
-             res_short = float(tmp_short_b)
-             client.futures_create_order(symbol=trade_pair, side='BUY', type='MARKET', positionSide='SHORT', quantity=int(res_short))
-             res_short = float(0)
-         if res_long == 0.0 and res_short == 0.0:
-             time.sleep(0.5)
-             client.futures_cancel_all_open_orders(symbol = trade_pair)
-         raise
+        print(bcolors.FAIL + f"ERROR!!!! 'place_doji_short'" + bcolors.ENDC)
+        res_long = float(client.futures_position_information(symbol = trade_pair)[1]['positionAmt'])
+        time.sleep(0.5)
+        res_short = float(client.futures_position_information(symbol = trade_pair)[2]['positionAmt'])
+        if res_long > 0.0:
+            time.sleep(0.5)
+            client.futures_create_order(symbol=trade_pair, side='SELL', type='MARKET', positionSide='LONG', quantity=int(res_long))
+            res_long = float(0)
+        if res_short < 0.0:
+            time.sleep(0.5)
+            tmp_short_b = str(client.futures_position_information(symbol = trade_pair)[2]['positionAmt'])[1:]
+            res_short = float(tmp_short_b)
+            client.futures_create_order(symbol=trade_pair, side='BUY', type='MARKET', positionSide='SHORT', quantity=int(res_short))
+            res_short = float(0)
+        if res_long == 0.0 and res_short == 0.0:
+            time.sleep(0.5)
+            client.futures_cancel_all_open_orders(symbol = trade_pair)
+        if telegram_notification == True:
+            tg_send_m(api_tg, chat_it_tg, 'ERROR!!!! place_doji_short')
+        raise
 
 def average_long(info_order_limit1, info_order_limit2, limit_position_vol_price, limit_position_vol_price2, limit_position_vol_price3, limit_position_vol_price4):
     try:
@@ -641,7 +691,7 @@ def average_long(info_order_limit1, info_order_limit2, limit_position_vol_price,
             print(f"Binance time: {str(datetime_from_millis(info_order_average1['updateTime']))[0:19]} {info_order_average1['symbol']} {info_order_average1['positionSide']} orderId:{info_order_average1['orderId']} price:{info_order_average1['price']} size:{info_order_average1['origQty']} {info_order_average1['type']} {info_order_average1['side']}")
             print(f"Binance time: {str(datetime_from_millis(info_order_average1_2['updateTime']))[0:19]} {info_order_average1_2['symbol']} {info_order_average1_2['positionSide']} orderId:{info_order_average1_2['orderId']} price:{info_order_average1_2['price']} size:{info_order_average1_2['origQty']} {info_order_average1_2['type']} {info_order_average1_2['side']}")
     except Exception:
-        print(bcolors.FAIL + f"ERROR!!!! 'average_long'" + bcolors.ENDC)
+        print(bcolors.FAIL + f'ERROR!!!! average_long' + bcolors.ENDC)
         res_long = float(client.futures_position_information(symbol = trade_pair)[1]['positionAmt'])
         time.sleep(0.5)
         res_short = float(client.futures_position_information(symbol = trade_pair)[2]['positionAmt'])
@@ -658,6 +708,8 @@ def average_long(info_order_limit1, info_order_limit2, limit_position_vol_price,
         if res_long == 0.0 and res_short == 0.0:
             time.sleep(0.5)
             client.futures_cancel_all_open_orders(symbol = trade_pair)
+        if telegram_notification == True:
+            tg_send_m(api_tg, chat_it_tg, 'ERROR!!!! average_long')
         raise
 
 def average_short(info_order_limit1, info_order_limit2, limit_position_vol_price, limit_position_vol_price2, limit_position_vol_price3, limit_position_vol_price4):
@@ -693,7 +745,7 @@ def average_short(info_order_limit1, info_order_limit2, limit_position_vol_price
             print(f"Binance time: {str(datetime_from_millis(info_order_average1['updateTime']))[0:19]} {info_order_average1['symbol']} {info_order_average1['positionSide']} orderId:{info_order_average1['orderId']} price:{info_order_average1['price']} size:{info_order_average1['origQty']} {info_order_average1['type']} {info_order_average1['side']}")
             print(f"Binance time: {str(datetime_from_millis(info_order_average1_2['updateTime']))[0:19]} {info_order_average1_2['symbol']} {info_order_average1_2['positionSide']} orderId:{info_order_average1_2['orderId']} price:{info_order_average1_2['price']} size:{info_order_average1_2['origQty']} {info_order_average1_2['type']} {info_order_average1_2['side']}")
     except Exception:
-        print(bcolors.FAIL + f"ERROR!!!! 'average_short'" + bcolors.ENDC)
+        print(bcolors.FAIL + f'ERROR!!!! average_short' + bcolors.ENDC)
         res_long = float(client.futures_position_information(symbol = trade_pair)[1]['positionAmt'])
         time.sleep(0.5)
         res_short = float(client.futures_position_information(symbol = trade_pair)[2]['positionAmt'])
@@ -710,6 +762,8 @@ def average_short(info_order_limit1, info_order_limit2, limit_position_vol_price
         if res_long == 0.0 and res_short == 0.0:
             time.sleep(0.5)
             client.futures_cancel_all_open_orders(symbol = trade_pair)
+        if telegram_notification == True:
+            tg_send_m(api_tg, chat_it_tg, 'ERROR!!!! average_short')
         raise
 
 def main_trade():
