@@ -403,7 +403,7 @@ def place_doji_long(High, Open, Close, Low):
         flag = True
         while flag == True:
             time.sleep(10)
-            check_position_volume_for_zero = int(client.futures_position_information(symbol = trade_pair)[1]['positionAmt'])
+            check_position_volume_for_zero = int(float(client.futures_position_information(symbol = trade_pair)[1]['positionAmt']))
             time.sleep(0.5)
             if check_position_volume_for_zero == 0:
                 print(bcolors.OKGREEN + trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'LONG Position balance 0!!! Close all open', trade_pair, 'oders...' + bcolors.ENDC)
@@ -598,7 +598,7 @@ def place_doji_short(High, Open, Close, Low):
         flag = True
         while flag == True:
             time.sleep(10)
-            check_position_volume_for_zero = int(client.futures_position_information(symbol = trade_pair)[2]['positionAmt'])
+            check_position_volume_for_zero = int(float(client.futures_position_information(symbol = trade_pair)[2]['positionAmt']))
             time.sleep(0.5)
             if check_position_volume_for_zero == 0:
                 print(bcolors.FAIL + trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'SHORT Position balance 0!!! Close all open', trade_pair, 'oders...' + bcolors.ENDC)
