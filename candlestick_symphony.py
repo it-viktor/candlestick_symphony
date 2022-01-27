@@ -21,7 +21,7 @@ class bcolors:
 
 
 api_key = "you_api_binance_futures"
-api_secret = "you_api_secret_binance_futures"    
+api_secret = "you_api_secret_binance_futures"
 symbol_hold = 'USDT'
 symbol_trade = 'CELR'
 doji_difference = float(0.0001)
