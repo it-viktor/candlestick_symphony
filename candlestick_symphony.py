@@ -155,7 +155,7 @@ def search_doji():
         print()
         print(trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'Start the bot in search of the doji star...')
         if telegram_notification == True:
-        	tg_send_m(api_tg, chat_id_tg, 'Start the bot in search of the doji star...')
+        	tg_send_m(api_tg, chat_id_tg, f'{trade_pair} Start the bot in search of the doji star...')
         while flag == True:
             time.sleep(1)
             tmp_localtime_m = str(time.strftime('%M', time.localtime(time.time()))[-2:])
@@ -199,7 +199,7 @@ def search_doji():
                                 print()
                                 print(bcolors.FAIL + trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'Short signal' + bcolors.ENDC)
                                 if telegram_notification == True:
-                                    tg_send_m(api_tg, chat_id_tg, 'Short signal in')
+                                    tg_send_m(api_tg, chat_id_tg, f'{trade_pair} Short signal in')
                                     balance_tg = f'Balance {int(check_hold_balance())} USDT'
                                     tg_send_m(api_tg, chat_id_tg, balance_tg)
                                     int(check_hold_balance())
@@ -215,7 +215,7 @@ def search_doji():
                                 print()
                                 print(bcolors.OKGREEN + trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'Long signal' + bcolors.ENDC)
                                 if telegram_notification == True:
-                                    tg_send_m(api_tg, chat_id_tg, 'Long signal in')
+                                    tg_send_m(api_tg, chat_id_tg, f'{trade_pair} Long signal in')
                                     balance_tg = f'Balance {int(check_hold_balance())} USDT'
                                     tg_send_m(api_tg, chat_id_tg, balance_tg)
                                 if flag_long == False:
