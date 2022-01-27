@@ -98,7 +98,7 @@ Start step by step:
 - CAUTOIN!!! There may be STOPLOSS and LOSS OF YOUR MONEY!!!
 - This version is only for USDT timeframe = 15m, leverage = 10 and symbol whose price is floating point(0.***)
 
-.. figure:: long.png
+.. figure:: long_.png
        :scale: 300 %
        :align: center
        :alt: Альтернативный текст
