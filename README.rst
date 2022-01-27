@@ -26,6 +26,7 @@ Start step by step:
 
     :~$ sudo apt-get update
     :~$ sudo apt-get upgrade
+    :~$ sudo dpkg-reconfigure tzdata
     
     :~$ lsb_release -a
     Description:  Ubuntu 20.04.3 LTS
