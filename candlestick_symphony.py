@@ -209,6 +209,9 @@ def search_doji():
                                     place_doji_short(High, Open, Close, Low)
                                     flag_short = False
                                     break
+                                print('flag_short == True')
+                                if telegram_notification == True:
+                                    tg_send_m(api_tg, chat_id_tg, f'{trade_pair} flag_short == True')
                                 count_main -= 1
                                 break
                             elif Open2 > Close2 and Open3 > Close3 and Low < Low2 and Low2 < Low3:
@@ -225,6 +228,8 @@ def search_doji():
                                     flag_long = False
                                     break
                                 print('flag_long == True')
+                                if telegram_notification == True:
+                                    tg_send_m(api_tg, chat_id_tg, f'{trade_pair} flag_long == True')
                                 count_main -= 1
                                 break
                             print(trade_pair, 'System  time:', time.strftime('%Y-%m-%d %H:%M', time.localtime()), 'Doji appeared in the wrong conditions, we are waiting for the next one ...')
