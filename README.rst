@@ -87,10 +87,6 @@ Start step by step:
 .. code:: python
 
     # сreate tg bot in fatherbot
-    # copy api
-    # send any message to the chat bot
-    # сhange flag == True
-    telegram_notification = True
     # enter environment variable tg_api
     :~$ export api_t=**********
     # enter environment variable tg_chat_id
@@ -98,6 +94,9 @@ Start step by step:
     # if you don't have chat_id_tg
     # send any message to the chat bot
     # and use def tg_get_update()
+    # сhange flag == True
+    telegram_notification = True
+
 
 
 - Attention!!! There may be errors
