@@ -94,7 +94,10 @@ Start step by step:
     # enter environment variable tg_api
     :~$ export api_t=**********
     # enter environment variable tg_chat_id
-    :~$ export t_id=922365775
+    :~$ export t_id=**********
+    # if you don't have chat_id_tg
+    # send any message to the chat bot
+    # and use def tg_get_update()
 
 
 - Attention!!! There may be errors
