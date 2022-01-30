@@ -42,8 +42,8 @@ def tg_get_update():
     chat_id = r['result'][-1]['message']['chat']['id']
     return chat_id
 
-chat_id_tg = tg_get_update()
-
+if telegram_notification == True:
+    chat_id_tg = tg_get_update()
 
 def tg_send_m(api_tg, chat_id_tg, text_m_tg):
     tmp_tg_m = requests.get(f'https://api.telegram.org/bot{api_tg}/sendmessage?chat_id={chat_id_tg}&text={text_m_tg}')
