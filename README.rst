@@ -44,10 +44,11 @@ Start step by step:
     
     :~$ apt install git
     :~$ git clone https://github.com/it-viktor/candlestick_symphony.git
+    :~$ export api_p=*****************
+    :~$ export api_s=*****************
+    
     
     change candlestick_symphony.py:
-    api_key = "****************"
-    api_secret = "****************"
     symbol_trade = 'CELR'
     doji_difference = float(0.0001)  # the difference in points between the open and close of the candle
     
@@ -90,8 +91,10 @@ Start step by step:
     # send any message to the chat bot
     # сhange flag == True
     telegram_notification = True
-    # enter api
-    api_tg = 'you_api_telegram'
+    # enter environment variable tg_api
+    :~$ export api_t=**********
+    # enter environment variable tg_chat_id
+    :~$ export t_id=922365775
 
 
 - Attention!!! There may be errors
