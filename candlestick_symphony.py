@@ -85,6 +85,8 @@ def check_hold_balance():
             client.futures_cancel_all_open_orders(symbol = trade_pair)
         if telegram_notification == True:
             tg_send_m(api_tg, chat_id_tg, 'ERROR!!!! check_hold_balance')
+        flag_long = False
+        flag_short = False
         raise
 
 print(f'Balance: {int(check_hold_balance())} USDT')
@@ -136,6 +138,8 @@ def calculate_summ_order_in():
             client.futures_cancel_all_open_orders(symbol = trade_pair)
         if telegram_notification == True:
             tg_send_m(api_tg, chat_id_tg, 'ERROR!!!! calculate_summ_order_in')
+        flag_long = False
+        flag_short = False
         raise
 
 flag_long = False
@@ -263,6 +267,8 @@ def search_doji():
             client.futures_cancel_all_open_orders(symbol = trade_pair)
         if telegram_notification == True:
             tg_send_m(api_tg, chat_id_tg, 'ERROR!!!! search_doji')
+        flag_long = False
+        flag_short = False
         raise
 
 average_order_long1 = 0
@@ -462,6 +468,8 @@ def place_doji_long(High, Open, Close, Low):
             client.futures_cancel_all_open_orders(symbol = trade_pair)
         if telegram_notification == True:
             tg_send_m(api_tg, chat_id_tg, 'ERROR!!!! place_doji_long')
+        flag_long = False
+        flag_short = False
         raise
 
 def place_doji_short(High, Open, Close, Low):
@@ -657,6 +665,8 @@ def place_doji_short(High, Open, Close, Low):
             client.futures_cancel_all_open_orders(symbol = trade_pair)
         if telegram_notification == True:
             tg_send_m(api_tg, chat_id_tg, 'ERROR!!!! place_doji_short')
+        flag_long = False
+        flag_short = False
         raise
 
 def average_long(info_order_limit1, info_order_limit2, limit_position_vol_price, limit_position_vol_price2, limit_position_vol_price3, limit_position_vol_price4):
@@ -711,6 +721,8 @@ def average_long(info_order_limit1, info_order_limit2, limit_position_vol_price,
             client.futures_cancel_all_open_orders(symbol = trade_pair)
         if telegram_notification == True:
             tg_send_m(api_tg, chat_id_tg, 'ERROR!!!! average_long')
+        flag_long = False
+        flag_short = False
         raise
 
 def average_short(info_order_limit1, info_order_limit2, limit_position_vol_price, limit_position_vol_price2, limit_position_vol_price3, limit_position_vol_price4):
@@ -765,6 +777,8 @@ def average_short(info_order_limit1, info_order_limit2, limit_position_vol_price
             client.futures_cancel_all_open_orders(symbol = trade_pair)
         if telegram_notification == True:
             tg_send_m(api_tg, chat_id_tg, 'ERROR!!!! average_short')
+        flag_long = False
+        flag_short = False
         raise
 
 def main_trade():
